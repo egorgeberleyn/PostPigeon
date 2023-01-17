@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.Server", "PostPigeon.Server\PostPigeon.Server.csproj", "{A768E8BB-55BD-4FF3-BA66-7739EAE1E169}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.DAL", "PostPigeon.DAL\PostPigeon.DAL.csproj", "{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.Domain", "PostPigeon.Domain\PostPigeon.Domain.csproj", "{1FF2B289-4019-45B4-B822-ED61CF2793B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A768E8BB-55BD-4FF3-BA66-7739EAE1E169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A768E8BB-55BD-4FF3-BA66-7739EAE1E169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A768E8BB-55BD-4FF3-BA66-7739EAE1E169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A768E8BB-55BD-4FF3-BA66-7739EAE1E169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF2B289-4019-45B4-B822-ED61CF2793B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF2B289-4019-45B4-B822-ED61CF2793B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF2B289-4019-45B4-B822-ED61CF2793B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF2B289-4019-45B4-B822-ED61CF2793B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
