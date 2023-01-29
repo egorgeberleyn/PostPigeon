@@ -1,27 +1,12 @@
-using Mapster;
-using MapsterMapper;
 using PostPigeon.DAL;
-using PostPigeon.DAL.DbRepositories;
-using PostPigeon.DAL.DbRepositories.Interfaces;
-using PostPigeon.Server.Mappings;
+using PostPigeon.Server;
 using PostPigeon.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddGrpc();
-
-    //Add mongoDb
-    builder.Services.Configure<ArsysChatDatabaseSettings>(builder.Configuration.GetSection("PostPigeonDatabase"));
-
-    //Add mapper
-    builder.Services.AddSingleton(GetConfiguredMappingConfig());
-    builder.Services.AddScoped<IMapper, ServiceMapper>();
-
-    //Add services
-    builder.Services.AddSingleton<IMessagesRepository, MessagesRepository>();
-    builder.Services.AddSingleton<IUsersRepository, UsersRepository>();
-    
-    builder.Services.AddCors();
+    builder.Services
+        .AddPresentation()
+        .AddInfrastructure(builder.Configuration);
 }
 
 var app = builder.Build();
@@ -33,11 +18,4 @@ var app = builder.Build();
     
     app.MapGrpcService<ChatroomService>();
     app.Run();
-}
-
-TypeAdapterConfig GetConfiguredMappingConfig()
-{
-    var config = new TypeAdapterConfig();
-    new RegisterMapper().Register(config);
-    return config;
 }

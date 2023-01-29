@@ -1,6 +1,6 @@
 ﻿using Grpc.Core;
 using Mapster;
-using PostPigeon.DAL.DbRepositories.Interfaces;
+using PostPigeon.DAL.Persistence.Repositories.Interfaces;
 using PostPigeon.Domain.Models;
 
 namespace PostPigeon.Server.Services;
@@ -19,32 +19,21 @@ public class ChatroomService : Chatroom.ChatroomBase
 
     public override async Task<JoinResponse> Join(JoinRequest request, ServerCallContext context)
     {
-        if(request.Name is "" or null)
+        if(string.IsNullOrEmpty(request.Name))
             return new JoinResponse { Error = "Name is required.", Result = JoinResult.Failed};
         
-        var user = await _usersRepository.GetAsync(request.Name);
-        if (user != null) 
+        if(await _usersRepository.GetByNameAsync(request.Name)  is not null)
             return new JoinResponse { Error = "User already exist.", Result = JoinResult.Failed};
-        
-        await _usersRepository.CreateAsync(new User
-        {
-            Id = Guid.NewGuid().ToString(),
-            Name = request.Name,
-            AvatarUrl = request.AvatarUrl,
-        });
+
+        var user = User.Create(request.Name, request.AvatarUrl);
+        await _usersRepository.CreateAsync(user);
         
         return new JoinResponse { Result = JoinResult.Success};
     }
 
     public override async Task<None> SendMessage(MessageRequest request, ServerCallContext context)
     {
-        var message = new Message()
-        {
-            Id = Guid.NewGuid().ToString(),
-            UserId = request.UserId,
-            Text = request.TextMessage,
-            Time = DateTime.Now,
-        };
+        var message = Message.Create(request.UserId, request.TextMessage);
         await _messagesRepository.CreateAsync(message);
 
         return new None();

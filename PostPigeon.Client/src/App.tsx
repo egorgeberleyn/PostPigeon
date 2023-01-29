@@ -13,7 +13,7 @@ function App() {
       req.setName("Egor")
       req.setAvatarUrl("just_url")
       client.join(req, {}, (err, resp) => {
-        console.log("ok")
+        console.log(resp.toObject())
       })
     })();
     

@@ -1,17 +1,22 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using PostPigeon.Domain.Models.Base;
 
 namespace PostPigeon.Domain.Models;
 
-public class Message
+public class Message : Entity
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    private Message(string id, string userId, string text) : base(id)
+    {
+        UserId = userId;
+        Text = text;
+        Time = DateTime.Now;
+    }
     
-    public string UserId { get; set; } = null!;
+    public string UserId { get; private set; }
 
-    public string Text { get; set; } = null!;
+    public string Text { get; private set; }
     
-    public DateTime Time { get; set; }
+    public DateTime Time { get; private set; }
+
+    public static Message Create(string userId, string text) => 
+        new (CreateId(), userId, text);
 }

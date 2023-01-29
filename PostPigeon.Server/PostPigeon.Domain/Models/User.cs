@@ -1,15 +1,19 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using PostPigeon.Domain.Models.Base;
 
 namespace PostPigeon.Domain.Models;
 
-public class User
+public class User : Entity
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    private User(string id, string name, string avatarUrl) : base(id)
+    {
+        Name = name;
+        AvatarUrl = avatarUrl;
+    }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; private set; } 
 
-    public string AvatarUrl { get; set; } = null!;
+    public string AvatarUrl { get; private set; }
+
+    public static User Create(string name, string avatarUrl) =>
+        new (CreateId(), name, avatarUrl);
 }
