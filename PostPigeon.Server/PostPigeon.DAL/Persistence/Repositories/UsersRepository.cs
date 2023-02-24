@@ -8,8 +8,8 @@ namespace PostPigeon.DAL.Persistence.Repositories;
 
 public class UsersRepository : BaseRepository<User>, IUsersRepository
 {
-    public UsersRepository(IOptions<DbSettings> dbSettings, string collectionName) 
-        : base(dbSettings, collectionName)
+    public UsersRepository(DbSettings dbSettings) 
+        : base(dbSettings, dbSettings.UsersCollectionName)
     {
     }
 

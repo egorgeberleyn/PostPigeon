@@ -83,8 +83,11 @@ export namespace MessageRequest {
 }
 
 export class MessageResponse extends jspb.Message {
-  getUserId(): string;
-  setUserId(value: string): MessageResponse;
+  getSenderId(): string;
+  setSenderId(value: string): MessageResponse;
+
+  getSenderAvatar(): string;
+  setSenderAvatar(value: string): MessageResponse;
 
   getTextMessage(): string;
   setTextMessage(value: string): MessageResponse;
@@ -99,7 +102,8 @@ export class MessageResponse extends jspb.Message {
 
 export namespace MessageResponse {
   export type AsObject = {
-    userId: string,
+    senderId: string,
+    senderAvatar: string,
     textMessage: string,
   }
 }
@@ -111,11 +115,11 @@ export class UserResponse extends jspb.Message {
   getName(): string;
   setName(value: string): UserResponse;
 
-  getStatus(): UserStatus;
-  setStatus(value: UserStatus): UserResponse;
+  getStatus(): Status;
+  setStatus(value: Status): UserResponse;
 
-  getAvatarUrl(): string;
-  setAvatarUrl(value: string): UserResponse;
+  getAvatar(): string;
+  setAvatar(value: string): UserResponse;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UserResponse.AsObject;
@@ -129,8 +133,8 @@ export namespace UserResponse {
   export type AsObject = {
     id: string,
     name: string,
-    status: UserStatus,
-    avatarUrl: string,
+    status: Status,
+    avatar: string,
   }
 }
 
@@ -176,7 +180,7 @@ export enum JoinResult {
   SUCCESS = 0,
   FAILED = 1,
 }
-export enum UserStatus { 
+export enum Status { 
   UNKNOWN = 0,
   ONLINE = 1,
   OFFLINE = 2,

@@ -8,14 +8,16 @@ namespace PostPigeon.DAL.Persistence.Repositories.Base;
 public abstract class BaseRepository<T> : IRepository<T>
     where T : Entity
 {
+    private readonly DbSettings _dbSettings;
     protected readonly IMongoCollection<T> Collection;
 
-    protected BaseRepository(IOptions<DbSettings> dbSettings, string collectionName)
+    protected BaseRepository(DbSettings dbSettings, string collectionName)
     {
+        _dbSettings = dbSettings;
         var mongoClient = new MongoClient(
-            dbSettings.Value.ConnectionString);
+            dbSettings.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(
-            dbSettings.Value.DatabaseName);
+            dbSettings.DatabaseName);
         Collection = mongoDatabase.GetCollection<T>(collectionName);
     }
     

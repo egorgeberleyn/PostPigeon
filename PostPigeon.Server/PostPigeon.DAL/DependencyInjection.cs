@@ -23,11 +23,13 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         //Add repo
-        services.AddSingleton<IMessagesRepository, MessagesRepository>();
-        services.AddSingleton<IUsersRepository, UsersRepository>();
+        services.AddScoped<IMessagesRepository, MessagesRepository>();
+        services.AddScoped<IUsersRepository, UsersRepository>();
         
-        //Add mongoDb
-        services.Configure<DbSettings>(configuration.GetSection(DbSettings.SectionName));
+        //Add mongoDb settings
+        var settings = new DbSettings();
+        configuration.GetSection("PostPigeonDatabase").Bind(settings);
+        services.AddSingleton(settings);
         
         //Guid as string in mongodb
         BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
