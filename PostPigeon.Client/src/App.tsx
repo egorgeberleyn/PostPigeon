@@ -7,9 +7,10 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import LoginPage from './pages/LoginPage';
+import { Box } from '@mui/system';
 
 function App() {
-  
+
   useEffect(() => {
     (async () => {
       const client = new ChatroomClient("http://localhost:8080");
@@ -19,13 +20,15 @@ function App() {
       client.join(req, {}, (err, resp) => {
         console.log(resp.toObject())
       })
-    })();  
+    })();
   }, []);
-  
+
   return (
-        <Routes>
-          <Route path='/' element={<LoginPage/>}/>
-        </Routes>
+    <Box>
+      <Routes>
+        <Route path='/' element={<LoginPage />} />
+      </Routes>
+    </Box>
   );
 }
 
