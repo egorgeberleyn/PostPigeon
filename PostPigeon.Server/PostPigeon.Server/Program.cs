@@ -1,4 +1,4 @@
-using PostPigeon.DAL;
+using PostPigeon.Infra;
 using PostPigeon.Server;
 using PostPigeon.Server.Services;
 
@@ -15,7 +15,11 @@ var app = builder.Build();
         options.WithOrigins("http://localhost:3000")
             .AllowAnyMethod()
             .AllowAnyHeader());
+
+    app.UseAuthentication();
+    app.UseAuthorization();
     
     app.MapGrpcService<ChatroomService>();
+    app.MapGrpcService<AuthService>();
     app.Run();
 }

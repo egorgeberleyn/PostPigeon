@@ -1,5 +1,5 @@
 ﻿using Mapster;
-using PostPigeon.Domain.Models;
+using PostPigeon.Core.Models;
 
 namespace PostPigeon.Server.Mappings;
 

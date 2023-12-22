@@ -2,9 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.Server", "PostPigeon.Server\PostPigeon.Server.csproj", "{A768E8BB-55BD-4FF3-BA66-7739EAE1E169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.DAL", "PostPigeon.DAL\PostPigeon.DAL.csproj", "{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.Infra", "PostPigeon.Infra\PostPigeon.Infra.csproj", "{358DB99B-DBC6-4200-913C-F8EF7B3CE33E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.Domain", "PostPigeon.Domain\PostPigeon.Domain.csproj", "{1FF2B289-4019-45B4-B822-ED61CF2793B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostPigeon.Core", "PostPigeon.Core\PostPigeon.Core.csproj", "{1FF2B289-4019-45B4-B822-ED61CF2793B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

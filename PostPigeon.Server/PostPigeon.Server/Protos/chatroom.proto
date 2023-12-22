@@ -11,7 +11,7 @@ service Chatroom {
   rpc GetUsers (None) returns (stream UserList);
 }
 
-message None { }
+message None {}
 
 message JoinRequest {
   string name = 1;
@@ -22,7 +22,6 @@ enum JoinResult {
   SUCCESS = 0;
   FAILED = 1;
 }
-
 message JoinResponse {
   string error = 1;
   JoinResult result = 2;
@@ -39,16 +38,15 @@ message MessageResponse {
   string text_message = 3;
 }
 
-enum Status {
+enum UserStatus {
   UNKNOWN = 0;
   ONLINE = 1;
   OFFLINE = 2;
 }
-
 message UserResponse {
   string id = 1;
   string name = 2;
-  Status status = 3;
+  UserStatus status = 3;
   string avatar = 4;
 }
 

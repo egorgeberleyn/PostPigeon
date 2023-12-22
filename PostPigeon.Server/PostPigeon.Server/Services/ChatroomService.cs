@@ -1,7 +1,7 @@
 ﻿using Grpc.Core;
 using Mapster;
-using PostPigeon.DAL.Persistence.Repositories.Interfaces;
-using PostPigeon.Domain.Models;
+using PostPigeon.Infra.Persistence.Repositories.Interfaces;
+using PostPigeon.Core.Models;
 
 namespace PostPigeon.Server.Services;
 
@@ -9,7 +9,7 @@ public class ChatroomService : Chatroom.ChatroomBase
 {
     private readonly IUsersRepository _usersRepository;
     private readonly IMessagesRepository _messagesRepository;
-    private readonly List<IServerStreamWriter<MessageResponse>> _observers = new();
+    private readonly List<IServerStreamWriter<MessageResponse>> _observers = [];
 
     public ChatroomService(IUsersRepository usersRepository, IMessagesRepository messagesRepository)
     {
@@ -25,8 +25,8 @@ public class ChatroomService : Chatroom.ChatroomBase
         if(await _usersRepository.GetByNameAsync(request.Name)  is not null)
             return new JoinResponse { Error = "User already exist.", Result = JoinResult.Failed};
 
-        var user = User.Create(request.Name, request.AvatarUrl);
-        await _usersRepository.CreateAsync(user);
+        /*var user = User.Create(request.Name, request.AvatarUrl);
+        await _usersRepository.CreateAsync(user);*/
         
         return new JoinResponse { Result = JoinResult.Success};
     }

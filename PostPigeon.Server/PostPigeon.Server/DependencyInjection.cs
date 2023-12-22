@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MapsterMapper;
+using PostPigeon.Server.Interceptors;
 using PostPigeon.Server.Mappings;
 
 namespace PostPigeon.Server;
@@ -9,8 +10,10 @@ public static class DependencyInjection
     public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
         services.AddCors();
-        
-        services.AddGrpc();
+        services.AddGrpc(options =>
+        {
+            options.Interceptors.Add<ExceptionInterceptor>();
+        });
     
         //Add mapper
         services.AddSingleton(

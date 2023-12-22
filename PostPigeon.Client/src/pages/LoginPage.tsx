@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material'
 import Typography from '@mui/material/Typography'
-import Login from '../components/Login'
+import LoginForm from '../components/Forms/LoginForm'
 import loginBg from '../images/loginPageBg.png'
 import pigeonImg from '../images/pigeon.png'
 
@@ -15,7 +15,7 @@ const LoginPage: React.FC = () => {
             <Typography variant='subtitle1' sx={{color: 'lightgray'}}>Web chat developed on gRPC/React stack</Typography>
           </Stack>
           
-          <Login />
+          <LoginForm />
         
         </Stack>
     </Box>
