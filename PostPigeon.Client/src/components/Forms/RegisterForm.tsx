@@ -2,11 +2,39 @@ import { Box, Typography, Stack, TextField, Button } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import EnhancedEncryptionIcon from "@mui/icons-material/EnhancedEncryption";
-import React from "react";
+import React, { FormEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../app/authClient";
+import useLocalStorage from "../../app/hooks/useLocalStorage";
+import ErrorMessage from "../Common/ErrorMessage";
+import { getInputValue } from "../../app/utils/formHelpers";
 
 const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
+
+  const { setValue } = useLocalStorage("token", "");
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    const name = getInputValue(event, "name");
+    const password = getInputValue(event, "password");
+    const confirmPassword = getInputValue(event, "confirmPassword");
+
+    if (password === confirmPassword) {
+      setError('Fields "password" and "confirmPassword" don\'t match');
+      return;
+    }
+
+    if (name && password)
+      register(name, password, "")
+        .then((tokenPair) => {
+          setValue(tokenPair.accessToken);
+          navigate("/");
+        })
+        .catch((error) => setError(error.message));
+  };
 
   return (
     <Box
@@ -18,7 +46,7 @@ const RegisterForm: React.FC = () => {
         boxShadow: "0 15px 25px rgba(0,0,0,.6)",
       }}
     >
-      <form style={{ width: "330px" }}>
+      <form style={{ width: "330px" }} onSubmit={handleSubmit}>
         <Typography variant="h4" sx={{ color: "white", textAlign: "center" }}>
           Register
         </Typography>
@@ -28,10 +56,12 @@ const RegisterForm: React.FC = () => {
         >
           Please sign up to continue
         </Typography>
+        {error && <ErrorMessage text={error} condition={error !== null} />}
         <Stack direction="column" spacing={2} sx={{ mt: 6 }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <AlternateEmailIcon sx={{ color: "info.main", mr: 1, my: 0.5 }} />
             <TextField
+              name="name"
               type="text"
               label="Name"
               fullWidth
@@ -49,6 +79,7 @@ const RegisterForm: React.FC = () => {
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <LockIcon sx={{ color: "info.main", mr: 1, my: 0.5 }} />
             <TextField
+              name="password"
               type="password"
               label="Password"
               fullWidth
@@ -68,6 +99,7 @@ const RegisterForm: React.FC = () => {
               sx={{ color: "info.main", mr: 1, my: 0.5 }}
             />
             <TextField
+              name="confirmPassword"
               type="password"
               label="Confirm Password"
               fullWidth
@@ -98,6 +130,7 @@ const RegisterForm: React.FC = () => {
             Back
           </Button>
           <Button
+            type="submit"
             variant="contained"
             sx={{ bgcolor: "lightgray", color: "black", px: 6, ml: 4 }}
           >
