@@ -1,0 +1,20 @@
+import { ChatroomClient } from "../protos/ChatroomServiceClientPb";
+import { MessageRequest, None } from "../protos/chatroom_pb";
+
+const EnvoyURL = "http://localhost:8080";
+
+export const sendMessage = async (userId: string, textMessage: string) => {
+  const client = new ChatroomClient(EnvoyURL);
+  const request = new MessageRequest();
+  request.setUserId(userId);
+  request.setTextMessage(textMessage);
+  const response = await client.sendMessage(request, {});
+  return response.toObject();
+};
+
+export const receiveMessages = async () => {
+    const client = new ChatroomClient(EnvoyURL);
+    const request = new None();
+    const chatStream = client.receiveMessages(request, {});
+    return chatStream;
+  };

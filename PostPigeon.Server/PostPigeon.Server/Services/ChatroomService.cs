@@ -17,20 +17,6 @@ public class ChatroomService : Chatroom.ChatroomBase
         _messagesRepository = messagesRepository;
     }
 
-    public override async Task<JoinResponse> Join(JoinRequest request, ServerCallContext context)
-    {
-        if(string.IsNullOrEmpty(request.Name))
-            return new JoinResponse { Error = "Name is required.", Result = JoinResult.Failed};
-        
-        if(await _usersRepository.GetByNameAsync(request.Name)  is not null)
-            return new JoinResponse { Error = "User already exist.", Result = JoinResult.Failed};
-
-        /*var user = User.Create(request.Name, request.AvatarUrl);
-        await _usersRepository.CreateAsync(user);*/
-        
-        return new JoinResponse { Result = JoinResult.Success};
-    }
-
     public override async Task<None> SendMessage(MessageRequest request, ServerCallContext context)
     {
         var message = Message.Create(request.UserId, request.TextMessage);
@@ -43,7 +29,7 @@ public class ChatroomService : Chatroom.ChatroomBase
         ServerCallContext context)
     {
         foreach (var message in await _messagesRepository.GetAllAsync())
-            await responseStream.WriteAsync(message.Adapt<MessageResponse>());
+            await responseStream.WriteAsync(new MessageResponse {TextMessage = message.Text, SenderId = message.UserId});
         
         _observers.Add(responseStream);
         while (!context.CancellationToken.IsCancellationRequested)

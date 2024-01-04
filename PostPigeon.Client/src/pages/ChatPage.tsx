@@ -1,6 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React from "react";
 import NavPanel from "../components/Layout/NavPanel";
+import MessagesList from "../components/Chat/MessagesList";
+import SendMessageForm from "../components/Forms/SendMessageForm";
 
 const ChatPage: React.FC = () => {
   return (
@@ -13,9 +15,20 @@ const ChatPage: React.FC = () => {
       }}
     >
       <NavPanel />
-      <Box sx={{left: "10%", position: "absolute", height: "100vh", width: "70%", pt: 5, bgcolor: "gray"}}>
-        
-      </Box>
+      <Stack
+        direction={"column"}
+        alignItems={"center"}
+        sx={{
+          left: "10%",
+          position: "absolute",
+          height: "100vh",
+          width: "70%",
+          pt: 5,
+        }}
+      >
+        <MessagesList />
+        <SendMessageForm />
+      </Stack>
     </Box>
   );
 };

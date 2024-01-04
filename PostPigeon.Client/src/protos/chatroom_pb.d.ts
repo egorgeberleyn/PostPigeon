@@ -16,50 +16,6 @@ export namespace None {
   }
 }
 
-export class JoinRequest extends jspb.Message {
-  getName(): string;
-  setName(value: string): JoinRequest;
-
-  getAvatarUrl(): string;
-  setAvatarUrl(value: string): JoinRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): JoinRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: JoinRequest): JoinRequest.AsObject;
-  static serializeBinaryToWriter(message: JoinRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): JoinRequest;
-  static deserializeBinaryFromReader(message: JoinRequest, reader: jspb.BinaryReader): JoinRequest;
-}
-
-export namespace JoinRequest {
-  export type AsObject = {
-    name: string,
-    avatarUrl: string,
-  }
-}
-
-export class JoinResponse extends jspb.Message {
-  getError(): string;
-  setError(value: string): JoinResponse;
-
-  getResult(): JoinResult;
-  setResult(value: JoinResult): JoinResponse;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): JoinResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: JoinResponse): JoinResponse.AsObject;
-  static serializeBinaryToWriter(message: JoinResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): JoinResponse;
-  static deserializeBinaryFromReader(message: JoinResponse, reader: jspb.BinaryReader): JoinResponse;
-}
-
-export namespace JoinResponse {
-  export type AsObject = {
-    error: string,
-    result: JoinResult,
-  }
-}
-
 export class MessageRequest extends jspb.Message {
   getUserId(): string;
   setUserId(value: string): MessageRequest;
@@ -115,8 +71,8 @@ export class UserResponse extends jspb.Message {
   getName(): string;
   setName(value: string): UserResponse;
 
-  getStatus(): Status;
-  setStatus(value: Status): UserResponse;
+  getStatus(): UserStatus;
+  setStatus(value: UserStatus): UserResponse;
 
   getAvatar(): string;
   setAvatar(value: string): UserResponse;
@@ -133,7 +89,7 @@ export namespace UserResponse {
   export type AsObject = {
     id: string,
     name: string,
-    status: Status,
+    status: UserStatus,
     avatar: string,
   }
 }
@@ -176,11 +132,7 @@ export namespace ReceiveRequest {
   }
 }
 
-export enum JoinResult { 
-  SUCCESS = 0,
-  FAILED = 1,
-}
-export enum Status { 
+export enum UserStatus { 
   UNKNOWN = 0,
   ONLINE = 1,
   OFFLINE = 2,

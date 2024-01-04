@@ -39,49 +39,6 @@ export class ChatroomClient {
     this.options_ = options;
   }
 
-  methodDescriptorJoin = new grpcWeb.MethodDescriptor(
-    '/chatroom.Chatroom/Join',
-    grpcWeb.MethodType.UNARY,
-    protos_chatroom_pb.JoinRequest,
-    protos_chatroom_pb.JoinResponse,
-    (request: protos_chatroom_pb.JoinRequest) => {
-      return request.serializeBinary();
-    },
-    protos_chatroom_pb.JoinResponse.deserializeBinary
-  );
-
-  join(
-    request: protos_chatroom_pb.JoinRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protos_chatroom_pb.JoinResponse>;
-
-  join(
-    request: protos_chatroom_pb.JoinRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError,
-               response: protos_chatroom_pb.JoinResponse) => void): grpcWeb.ClientReadableStream<protos_chatroom_pb.JoinResponse>;
-
-  join(
-    request: protos_chatroom_pb.JoinRequest,
-    metadata: grpcWeb.Metadata | null,
-    callback?: (err: grpcWeb.RpcError,
-               response: protos_chatroom_pb.JoinResponse) => void) {
-    if (callback !== undefined) {
-      return this.client_.rpcCall(
-        this.hostname_ +
-          '/chatroom.Chatroom/Join',
-        request,
-        metadata || {},
-        this.methodDescriptorJoin,
-        callback);
-    }
-    return this.client_.unaryCall(
-    this.hostname_ +
-      '/chatroom.Chatroom/Join',
-    request,
-    metadata || {},
-    this.methodDescriptorJoin);
-  }
-
   methodDescriptorSendMessage = new grpcWeb.MethodDescriptor(
     '/chatroom.Chatroom/SendMessage',
     grpcWeb.MethodType.UNARY,

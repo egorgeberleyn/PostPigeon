@@ -5,27 +5,12 @@ option csharp_namespace = "PostPigeon.Server";
 package chatroom;
 
 service Chatroom {
-  rpc Join (JoinRequest) returns (JoinResponse);
   rpc SendMessage (MessageRequest) returns (None);
   rpc ReceiveMessages (None) returns (stream MessageResponse);
   rpc GetUsers (None) returns (stream UserList);
 }
 
 message None {}
-
-message JoinRequest {
-  string name = 1;
-  string avatar_url = 2;
-}
-
-enum JoinResult {
-  SUCCESS = 0;
-  FAILED = 1;
-}
-message JoinResponse {
-  string error = 1;
-  JoinResult result = 2;
-}
 
 message MessageRequest {
   string user_id = 1;
