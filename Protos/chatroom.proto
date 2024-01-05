@@ -1,16 +1,16 @@
 ﻿syntax = "proto3";
 
+import "common.proto";
+
 option csharp_namespace = "PostPigeon.Server";
 
 package chatroom;
 
 service Chatroom {
-  rpc SendMessage (MessageRequest) returns (None);
-  rpc ReceiveMessages (None) returns (stream MessageResponse);
-  rpc GetUsers (None) returns (stream UserList);
+  rpc SendMessage (MessageRequest) returns (common.None);
+  rpc ReceiveMessages (common.None) returns (stream MessageResponse);
+  rpc GetUsers (common.None) returns (stream UserList);
 }
-
-message None {}
 
 message MessageRequest {
   string user_id = 1;

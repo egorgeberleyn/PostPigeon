@@ -19,8 +19,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Protobuf Include="..\..\Protos\chatroom.proto" GrpcServices="Server" />
-        <Protobuf Include="..\..\Protos\auth.proto" GrpcServices="Server" />
+        <Protobuf Include="..\..\Protos\chatroom.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\Protos\auth.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\Protos\common.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>

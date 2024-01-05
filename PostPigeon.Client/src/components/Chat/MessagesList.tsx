@@ -33,7 +33,27 @@ const MessagesList = () => {
   }, []);
 
   return (
-    <Box width={"450px"}>
+    <Box
+      width={"450px"}
+      sx={{
+        overflowY: "auto",
+        overflowX: "hidden",
+        scrollbarWidth: "thin",
+        "&::-webkit-scrollbar": {
+          width: "0.4em",
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#222222",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#f1f1f1",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#fff",
+        },
+      }}
+      mb={5}
+    >
       <MessageItem text="Actually there is." isOwn={false} />
       <MessageItem
         text="I need to know the privacy policy of your business in a very short summary."

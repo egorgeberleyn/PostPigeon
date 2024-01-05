@@ -8,7 +8,7 @@
 // versions:
 // 	protoc-gen-grpc-web v1.4.2
 // 	protoc              v4.25.1
-// source: protos/auth.proto
+// source: auth.proto
 
 
 /* eslint-disable */
@@ -17,7 +17,7 @@
 
 import * as grpcWeb from 'grpc-web';
 
-import * as protos_auth_pb from '../protos/auth_pb';
+import * as auth_pb from './auth_pb';
 
 
 export class AuthClient {
@@ -42,29 +42,29 @@ export class AuthClient {
   methodDescriptorLogin = new grpcWeb.MethodDescriptor(
     '/auth.Auth/Login',
     grpcWeb.MethodType.UNARY,
-    protos_auth_pb.LoginRequest,
-    protos_auth_pb.TokenPair,
-    (request: protos_auth_pb.LoginRequest) => {
+    auth_pb.LoginRequest,
+    auth_pb.TokenPair,
+    (request: auth_pb.LoginRequest) => {
       return request.serializeBinary();
     },
-    protos_auth_pb.TokenPair.deserializeBinary
+    auth_pb.TokenPair.deserializeBinary
   );
 
   login(
-    request: protos_auth_pb.LoginRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protos_auth_pb.TokenPair>;
+    request: auth_pb.LoginRequest,
+    metadata: grpcWeb.Metadata | null): Promise<auth_pb.TokenPair>;
 
   login(
-    request: protos_auth_pb.LoginRequest,
+    request: auth_pb.LoginRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: protos_auth_pb.TokenPair) => void): grpcWeb.ClientReadableStream<protos_auth_pb.TokenPair>;
+               response: auth_pb.TokenPair) => void): grpcWeb.ClientReadableStream<auth_pb.TokenPair>;
 
   login(
-    request: protos_auth_pb.LoginRequest,
+    request: auth_pb.LoginRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: protos_auth_pb.TokenPair) => void) {
+               response: auth_pb.TokenPair) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
@@ -85,29 +85,29 @@ export class AuthClient {
   methodDescriptorRegister = new grpcWeb.MethodDescriptor(
     '/auth.Auth/Register',
     grpcWeb.MethodType.UNARY,
-    protos_auth_pb.RegisterRequest,
-    protos_auth_pb.TokenPair,
-    (request: protos_auth_pb.RegisterRequest) => {
+    auth_pb.RegisterRequest,
+    auth_pb.TokenPair,
+    (request: auth_pb.RegisterRequest) => {
       return request.serializeBinary();
     },
-    protos_auth_pb.TokenPair.deserializeBinary
+    auth_pb.TokenPair.deserializeBinary
   );
 
   register(
-    request: protos_auth_pb.RegisterRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protos_auth_pb.TokenPair>;
+    request: auth_pb.RegisterRequest,
+    metadata: grpcWeb.Metadata | null): Promise<auth_pb.TokenPair>;
 
   register(
-    request: protos_auth_pb.RegisterRequest,
+    request: auth_pb.RegisterRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: protos_auth_pb.TokenPair) => void): grpcWeb.ClientReadableStream<protos_auth_pb.TokenPair>;
+               response: auth_pb.TokenPair) => void): grpcWeb.ClientReadableStream<auth_pb.TokenPair>;
 
   register(
-    request: protos_auth_pb.RegisterRequest,
+    request: auth_pb.RegisterRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: protos_auth_pb.TokenPair) => void) {
+               response: auth_pb.TokenPair) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
@@ -128,29 +128,29 @@ export class AuthClient {
   methodDescriptorRefreshToken = new grpcWeb.MethodDescriptor(
     '/auth.Auth/RefreshToken',
     grpcWeb.MethodType.UNARY,
-    protos_auth_pb.RefreshTokenRequest,
-    protos_auth_pb.TokenPair,
-    (request: protos_auth_pb.RefreshTokenRequest) => {
+    auth_pb.RefreshTokenRequest,
+    auth_pb.TokenPair,
+    (request: auth_pb.RefreshTokenRequest) => {
       return request.serializeBinary();
     },
-    protos_auth_pb.TokenPair.deserializeBinary
+    auth_pb.TokenPair.deserializeBinary
   );
 
   refreshToken(
-    request: protos_auth_pb.RefreshTokenRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protos_auth_pb.TokenPair>;
+    request: auth_pb.RefreshTokenRequest,
+    metadata: grpcWeb.Metadata | null): Promise<auth_pb.TokenPair>;
 
   refreshToken(
-    request: protos_auth_pb.RefreshTokenRequest,
+    request: auth_pb.RefreshTokenRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: protos_auth_pb.TokenPair) => void): grpcWeb.ClientReadableStream<protos_auth_pb.TokenPair>;
+               response: auth_pb.TokenPair) => void): grpcWeb.ClientReadableStream<auth_pb.TokenPair>;
 
   refreshToken(
-    request: protos_auth_pb.RefreshTokenRequest,
+    request: auth_pb.RefreshTokenRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: protos_auth_pb.TokenPair) => void) {
+               response: auth_pb.TokenPair) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +

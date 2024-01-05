@@ -8,7 +8,7 @@
 // versions:
 // 	protoc-gen-grpc-web v1.4.2
 // 	protoc              v4.25.1
-// source: protos/chatroom.proto
+// source: chatroom.proto
 
 
 /* eslint-disable */
@@ -17,7 +17,8 @@
 
 import * as grpcWeb from 'grpc-web';
 
-import * as protos_chatroom_pb from '../protos/chatroom_pb';
+import * as chatroom_pb from './chatroom_pb';
+import * as common_pb from './common_pb';
 
 
 export class ChatroomClient {
@@ -42,29 +43,29 @@ export class ChatroomClient {
   methodDescriptorSendMessage = new grpcWeb.MethodDescriptor(
     '/chatroom.Chatroom/SendMessage',
     grpcWeb.MethodType.UNARY,
-    protos_chatroom_pb.MessageRequest,
-    protos_chatroom_pb.None,
-    (request: protos_chatroom_pb.MessageRequest) => {
+    chatroom_pb.MessageRequest,
+    common_pb.None,
+    (request: chatroom_pb.MessageRequest) => {
       return request.serializeBinary();
     },
-    protos_chatroom_pb.None.deserializeBinary
+    common_pb.None.deserializeBinary
   );
 
   sendMessage(
-    request: protos_chatroom_pb.MessageRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protos_chatroom_pb.None>;
+    request: chatroom_pb.MessageRequest,
+    metadata: grpcWeb.Metadata | null): Promise<common_pb.None>;
 
   sendMessage(
-    request: protos_chatroom_pb.MessageRequest,
+    request: chatroom_pb.MessageRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: protos_chatroom_pb.None) => void): grpcWeb.ClientReadableStream<protos_chatroom_pb.None>;
+               response: common_pb.None) => void): grpcWeb.ClientReadableStream<common_pb.None>;
 
   sendMessage(
-    request: protos_chatroom_pb.MessageRequest,
+    request: chatroom_pb.MessageRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: protos_chatroom_pb.None) => void) {
+               response: common_pb.None) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
@@ -85,17 +86,17 @@ export class ChatroomClient {
   methodDescriptorReceiveMessages = new grpcWeb.MethodDescriptor(
     '/chatroom.Chatroom/ReceiveMessages',
     grpcWeb.MethodType.SERVER_STREAMING,
-    protos_chatroom_pb.None,
-    protos_chatroom_pb.MessageResponse,
-    (request: protos_chatroom_pb.None) => {
+    common_pb.None,
+    chatroom_pb.MessageResponse,
+    (request: common_pb.None) => {
       return request.serializeBinary();
     },
-    protos_chatroom_pb.MessageResponse.deserializeBinary
+    chatroom_pb.MessageResponse.deserializeBinary
   );
 
   receiveMessages(
-    request: protos_chatroom_pb.None,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<protos_chatroom_pb.MessageResponse> {
+    request: common_pb.None,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<chatroom_pb.MessageResponse> {
     return this.client_.serverStreaming(
       this.hostname_ +
         '/chatroom.Chatroom/ReceiveMessages',
@@ -107,17 +108,17 @@ export class ChatroomClient {
   methodDescriptorGetUsers = new grpcWeb.MethodDescriptor(
     '/chatroom.Chatroom/GetUsers',
     grpcWeb.MethodType.SERVER_STREAMING,
-    protos_chatroom_pb.None,
-    protos_chatroom_pb.UserList,
-    (request: protos_chatroom_pb.None) => {
+    common_pb.None,
+    chatroom_pb.UserList,
+    (request: common_pb.None) => {
       return request.serializeBinary();
     },
-    protos_chatroom_pb.UserList.deserializeBinary
+    chatroom_pb.UserList.deserializeBinary
   );
 
   getUsers(
-    request: protos_chatroom_pb.None,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<protos_chatroom_pb.UserList> {
+    request: common_pb.None,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<chatroom_pb.UserList> {
     return this.client_.serverStreaming(
       this.hostname_ +
         '/chatroom.Chatroom/GetUsers',

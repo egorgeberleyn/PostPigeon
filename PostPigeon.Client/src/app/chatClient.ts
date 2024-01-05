@@ -1,5 +1,6 @@
 import { ChatroomClient } from "../protos/ChatroomServiceClientPb";
-import { MessageRequest, None } from "../protos/chatroom_pb";
+import { MessageRequest } from "../protos/chatroom_pb";
+import { None } from "../protos/common_pb";
 
 const EnvoyURL = process.env.REACT_APP_ENVOY_URL ?? "http://localhost:8080";
 

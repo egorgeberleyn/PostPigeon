@@ -1,9 +1,9 @@
 ﻿using System.Threading.Channels;
 using PostPigeon.Core.Models;
 
-namespace PostPigeon.Core.Services;
+namespace PostPigeon.Core;
 
-public class RoomService
+public class Room
 {
     private readonly Channel<Message> _messageChannel = Channel.CreateUnbounded<Message>(new UnboundedChannelOptions {
         SingleReader = true

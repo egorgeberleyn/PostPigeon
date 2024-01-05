@@ -1,9 +1,9 @@
 ﻿using Grpc.Core;
 using Mapster;
 using MapsterMapper;
+using PostPigeon.Core;
 using PostPigeon.Infra.Persistence.Repositories.Interfaces;
 using PostPigeon.Core.Models;
-using PostPigeon.Core.Services;
 
 namespace PostPigeon.Server.Services;
 
@@ -12,14 +12,14 @@ public class ChatroomService : Chatroom.ChatroomBase
     private readonly IMapper _mapper;
     private readonly IUsersRepository _usersRepository;
     private readonly IMessagesRepository _messagesRepository;
-    private readonly RoomService _roomService;
+    private readonly Room _room;
 
     public ChatroomService(IUsersRepository usersRepository, IMessagesRepository messagesRepository, 
-        RoomService roomService, IMapper mapper)
+        Room room, IMapper mapper)
     {
         _usersRepository = usersRepository;
         _messagesRepository = messagesRepository;
-        _roomService = roomService;
+        _room = room;
         _mapper = mapper;
     }
 
@@ -27,7 +27,7 @@ public class ChatroomService : Chatroom.ChatroomBase
     {
         var message = Message.Create(request.UserId, request.TextMessage);
         await _messagesRepository.CreateAsync(message);
-        await _roomService.WriteMessageAsync(message);
+        await _room.WriteMessageAsync(message);
         return new None();
     }
 
@@ -40,7 +40,7 @@ public class ChatroomService : Chatroom.ChatroomBase
         
         while (!context.CancellationToken.IsCancellationRequested)
         {
-            var msg = await _roomService.ReadMessageAsync(context.CancellationToken);
+            var msg = await _room.ReadMessageAsync(context.CancellationToken);
             await responseStream.WriteAsync(_mapper.Map<MessageResponse>(msg));
             
         }
