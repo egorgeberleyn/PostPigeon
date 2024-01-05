@@ -1,7 +1,7 @@
 import { ChatroomClient } from "../protos/ChatroomServiceClientPb";
 import { MessageRequest, None } from "../protos/chatroom_pb";
 
-const EnvoyURL = "http://localhost:8080";
+const EnvoyURL = process.env.REACT_APP_ENVOY_URL ?? "http://localhost:8080";
 
 export const sendMessage = async (userId: string, textMessage: string) => {
   const client = new ChatroomClient(EnvoyURL);
@@ -13,8 +13,8 @@ export const sendMessage = async (userId: string, textMessage: string) => {
 };
 
 export const receiveMessages = async () => {
-    const client = new ChatroomClient(EnvoyURL);
-    const request = new None();
-    const chatStream = client.receiveMessages(request, {});
-    return chatStream;
-  };
+  const client = new ChatroomClient(EnvoyURL);
+  const request = new None();
+  const chatStream = client.receiveMessages(request, {});
+  return chatStream;
+};

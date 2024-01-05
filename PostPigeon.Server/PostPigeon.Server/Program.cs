@@ -1,3 +1,7 @@
+using System.Threading.Channels;
+using PostPigeon.Core;
+using PostPigeon.Core.Models;
+using PostPigeon.Core.Services;
 using PostPigeon.Infra;
 using PostPigeon.Server;
 using PostPigeon.Server.Services;
@@ -5,6 +9,7 @@ using PostPigeon.Server.Services;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddCore()
         .AddPresentation()
         .AddInfrastructure(builder.Configuration);
 }

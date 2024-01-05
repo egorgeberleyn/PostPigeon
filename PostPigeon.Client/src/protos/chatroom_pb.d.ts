@@ -42,9 +42,6 @@ export class MessageResponse extends jspb.Message {
   getSenderId(): string;
   setSenderId(value: string): MessageResponse;
 
-  getSenderAvatar(): string;
-  setSenderAvatar(value: string): MessageResponse;
-
   getTextMessage(): string;
   setTextMessage(value: string): MessageResponse;
 
@@ -59,7 +56,6 @@ export class MessageResponse extends jspb.Message {
 export namespace MessageResponse {
   export type AsObject = {
     senderId: string,
-    senderAvatar: string,
     textMessage: string,
   }
 }

@@ -19,8 +19,7 @@ message MessageRequest {
 
 message MessageResponse {
   string sender_id = 1;
-  string sender_avatar = 2;
-  string text_message = 3;
+  string text_message = 2;
 }
 
 enum UserStatus {

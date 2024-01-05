@@ -5,7 +5,7 @@ import {
   RegisterRequest,
 } from "../protos/auth_pb";
 
-const EnvoyURL = "http://localhost:8080";
+const EnvoyURL = process.env.REACT_APP_ENVOY_URL ?? "http://localhost:8080";
 
 export const login = async (name: string, password: string) => {
   const client = new AuthClient(EnvoyURL);

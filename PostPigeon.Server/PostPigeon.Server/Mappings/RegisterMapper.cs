@@ -11,6 +11,8 @@ public class RegisterMapper : IRegister
             .RequireDestinationMemberSource(true);
 
         config.NewConfig<Message, MessageResponse>()
+            .Map(dist => dist.TextMessage, src => src.Text)
+            .Map(dist => dist.SenderId, src => src.UserId)
             .RequireDestinationMemberSource(true);
     }
 }

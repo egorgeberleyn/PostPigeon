@@ -14,7 +14,10 @@ const SendMessageForm = () => {
     const message = getInputValue(event, "message");
     const jwtPayload = decodeToken(storedValue);
 
-    if (message) sendMessage(jwtPayload.sub!, message);
+    if (message) {
+      sendMessage(jwtPayload.sub!, message);
+      event.currentTarget.reset();
+    }
   };
 
   return (

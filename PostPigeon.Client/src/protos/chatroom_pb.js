@@ -448,8 +448,7 @@ proto.chatroom.MessageResponse.prototype.toObject = function(opt_includeInstance
 proto.chatroom.MessageResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     senderId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    senderAvatar: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    textMessage: jspb.Message.getFieldWithDefault(msg, 3, "")
+    textMessage: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -492,10 +491,6 @@ proto.chatroom.MessageResponse.deserializeBinaryFromReader = function(msg, reade
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setSenderAvatar(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
       msg.setTextMessage(value);
       break;
     default:
@@ -534,17 +529,10 @@ proto.chatroom.MessageResponse.serializeBinaryToWriter = function(message, write
       f
     );
   }
-  f = message.getSenderAvatar();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getTextMessage();
   if (f.length > 0) {
     writer.writeString(
-      3,
+      2,
       f
     );
   }
@@ -570,10 +558,10 @@ proto.chatroom.MessageResponse.prototype.setSenderId = function(value) {
 
 
 /**
- * optional string sender_avatar = 2;
+ * optional string text_message = 2;
  * @return {string}
  */
-proto.chatroom.MessageResponse.prototype.getSenderAvatar = function() {
+proto.chatroom.MessageResponse.prototype.getTextMessage = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -582,26 +570,8 @@ proto.chatroom.MessageResponse.prototype.getSenderAvatar = function() {
  * @param {string} value
  * @return {!proto.chatroom.MessageResponse} returns this
  */
-proto.chatroom.MessageResponse.prototype.setSenderAvatar = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string text_message = 3;
- * @return {string}
- */
-proto.chatroom.MessageResponse.prototype.getTextMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.chatroom.MessageResponse} returns this
- */
 proto.chatroom.MessageResponse.prototype.setTextMessage = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

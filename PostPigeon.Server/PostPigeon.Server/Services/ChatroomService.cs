@@ -1,40 +1,49 @@
 ﻿using Grpc.Core;
 using Mapster;
+using MapsterMapper;
 using PostPigeon.Infra.Persistence.Repositories.Interfaces;
 using PostPigeon.Core.Models;
+using PostPigeon.Core.Services;
 
 namespace PostPigeon.Server.Services;
 
 public class ChatroomService : Chatroom.ChatroomBase
 {
+    private readonly IMapper _mapper;
     private readonly IUsersRepository _usersRepository;
     private readonly IMessagesRepository _messagesRepository;
-    private readonly List<IServerStreamWriter<MessageResponse>> _observers = [];
+    private readonly RoomService _roomService;
 
-    public ChatroomService(IUsersRepository usersRepository, IMessagesRepository messagesRepository)
+    public ChatroomService(IUsersRepository usersRepository, IMessagesRepository messagesRepository, 
+        RoomService roomService, IMapper mapper)
     {
         _usersRepository = usersRepository;
         _messagesRepository = messagesRepository;
+        _roomService = roomService;
+        _mapper = mapper;
     }
 
     public override async Task<None> SendMessage(MessageRequest request, ServerCallContext context)
     {
         var message = Message.Create(request.UserId, request.TextMessage);
         await _messagesRepository.CreateAsync(message);
-
+        await _roomService.WriteMessageAsync(message);
         return new None();
     }
 
     public override async Task ReceiveMessages(None request, IServerStreamWriter<MessageResponse> responseStream, 
         ServerCallContext context)
     {
-        foreach (var message in await _messagesRepository.GetAllAsync())
-            await responseStream.WriteAsync(new MessageResponse {TextMessage = message.Text, SenderId = message.UserId});
+        //Receive previous messages
+        foreach (var msg in await _messagesRepository.GetAllAsync())
+            await responseStream.WriteAsync(_mapper.Map<MessageResponse>(msg));
         
-        _observers.Add(responseStream);
         while (!context.CancellationToken.IsCancellationRequested)
-            await Task.Delay(100);
-        _observers.Remove(responseStream);
+        {
+            var msg = await _roomService.ReadMessageAsync(context.CancellationToken);
+            await responseStream.WriteAsync(_mapper.Map<MessageResponse>(msg));
+            
+        }
     }
 
     public override async Task GetUsers(None request, IServerStreamWriter<UserList> responseStream, 
