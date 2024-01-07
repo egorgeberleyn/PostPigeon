@@ -19,13 +19,11 @@ export const login = async (name: string, password: string) => {
 export const register = async (
   name: string,
   password: string,
-  avatarUrl: string
 ) => {
   const client = new AuthClient(EnvoyURL);
   const request = new RegisterRequest();
   request.setUsername(name);
   request.setPassword(password);
-  request.setAvatarUrl(avatarUrl);
   const response = await client.register(request, {});
   return response.toObject();
 };

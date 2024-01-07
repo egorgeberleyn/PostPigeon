@@ -302,8 +302,7 @@ proto.auth.RegisterRequest.prototype.toObject = function(opt_includeInstance) {
 proto.auth.RegisterRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    avatarUrl: jspb.Message.getFieldWithDefault(msg, 3, "")
+    password: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -348,10 +347,6 @@ proto.auth.RegisterRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setPassword(value);
       break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAvatarUrl(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -395,13 +390,6 @@ proto.auth.RegisterRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getAvatarUrl();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
 };
 
 
@@ -438,24 +426,6 @@ proto.auth.RegisterRequest.prototype.getPassword = function() {
  */
 proto.auth.RegisterRequest.prototype.setPassword = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string avatar_url = 3;
- * @return {string}
- */
-proto.auth.RegisterRequest.prototype.getAvatarUrl = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.auth.RegisterRequest} returns this
- */
-proto.auth.RegisterRequest.prototype.setAvatarUrl = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

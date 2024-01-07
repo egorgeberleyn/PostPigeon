@@ -28,7 +28,7 @@ const RegisterForm: React.FC = () => {
     }
 
     if (name && password)
-      register(name, password, "")
+      register(name, password)
         .then((tokenPair) => {
           setValue(tokenPair.accessToken);
           navigate("/");
@@ -123,7 +123,7 @@ const RegisterForm: React.FC = () => {
           }}
         >
           <Button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/auth/login")}
             variant="contained"
             sx={{ bgcolor: "#252525", color: "white", px: 6 }}
           >

@@ -9,7 +9,6 @@ package chatroom;
 service Chatroom {
   rpc SendMessage (MessageRequest) returns (common.None);
   rpc ReceiveMessages (common.None) returns (stream MessageResponse);
-  rpc GetUsers (common.None) returns (stream UserList);
 }
 
 message MessageRequest {
@@ -20,22 +19,6 @@ message MessageRequest {
 message MessageResponse {
   string sender_id = 1;
   string text_message = 2;
-}
-
-enum UserStatus {
-  UNKNOWN = 0;
-  ONLINE = 1;
-  OFFLINE = 2;
-}
-message UserResponse {
-  string id = 1;
-  string name = 2;
-  UserStatus status = 3;
-  string avatar = 4;
-}
-
-message UserList {
-  repeated UserResponse users = 1;
 }
 
 message ReceiveRequest {

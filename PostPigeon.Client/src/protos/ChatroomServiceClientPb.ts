@@ -105,27 +105,5 @@ export class ChatroomClient {
       this.methodDescriptorReceiveMessages);
   }
 
-  methodDescriptorGetUsers = new grpcWeb.MethodDescriptor(
-    '/chatroom.Chatroom/GetUsers',
-    grpcWeb.MethodType.SERVER_STREAMING,
-    common_pb.None,
-    chatroom_pb.UserList,
-    (request: common_pb.None) => {
-      return request.serializeBinary();
-    },
-    chatroom_pb.UserList.deserializeBinary
-  );
-
-  getUsers(
-    request: common_pb.None,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<chatroom_pb.UserList> {
-    return this.client_.serverStreaming(
-      this.hostname_ +
-        '/chatroom.Chatroom/GetUsers',
-      request,
-      metadata || {},
-      this.methodDescriptorGetUsers);
-  }
-
 }
 

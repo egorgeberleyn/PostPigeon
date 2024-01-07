@@ -103,7 +103,7 @@ const LoginForm: React.FC = () => {
             Log in
           </Button>
           <Button
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/auth/register")}
             variant="contained"
             sx={{ bgcolor: "#252525", color: "white", px: 6, ml: 4 }}
           >

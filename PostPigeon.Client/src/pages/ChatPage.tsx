@@ -3,23 +3,18 @@ import React from "react";
 import NavPanel from "../components/Layout/NavPanel";
 import MessagesList from "../components/Chat/MessagesList";
 import SendMessageForm from "../components/Forms/SendMessageForm";
+import ChatPanel from "../components/Layout/ChatPanel";
 
 const ChatPage: React.FC = () => {
   return (
-    <Box
-      sx={{
-        bgcolor: "#171717",
-        height: "100vh",
-        color: "white",
-        display: "flex",
-      }}
-    >
-      <NavPanel />
+    <>
+      <ChatPanel />
       <Stack
         direction={"column"}
         alignItems={"center"}
+        justifyContent={"center"}
         sx={{
-          left: "10%",
+          left: "15%",
           position: "absolute",
           height: "100vh",
           width: "70%",
@@ -29,7 +24,7 @@ const ChatPage: React.FC = () => {
         <MessagesList />
         <SendMessageForm />
       </Stack>
-    </Box>
+    </>
   );
 };
 

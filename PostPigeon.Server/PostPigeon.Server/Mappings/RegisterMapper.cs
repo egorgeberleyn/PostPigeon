@@ -7,7 +7,8 @@ public class RegisterMapper : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<User, UserResponse>()
+        config.NewConfig<User, Profile>()
+            .Map(dist => dist.UserId, src => src.Id)
             .RequireDestinationMemberSource(true);
 
         config.NewConfig<Message, MessageResponse>()

@@ -23,5 +23,6 @@ var app = builder.Build();
     
     app.MapGrpcService<ChatroomService>();
     app.MapGrpcService<AuthService>();
+    app.MapGrpcService<ProfilesService>();
     app.Run();
 }

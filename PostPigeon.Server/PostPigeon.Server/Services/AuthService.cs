@@ -22,10 +22,10 @@ public class AuthService : Auth.AuthBase
     public override async Task<TokenPair> Register(RegisterRequest request, ServerCallContext context)
     {
         if (await _usersRepository.GetByNameAsync(request.Username) is not null)
-            throw new UserExistsException("Пользователь с таким username уже есть");
+            throw new UserExistsException("User with same name already exists");
 
         var passwordHash = BC.HashPassword(request.Password);
-        var newUser = User.Create(request.Username, request.AvatarUrl, passwordHash);
+        var newUser = User.Create(request.Username, passwordHash);
         await _usersRepository.CreateAsync(newUser);
         
         var tokens = await _jwtTokenizer.GenerateTokenPairAsync(newUser);
@@ -36,9 +36,9 @@ public class AuthService : Auth.AuthBase
     {
         var user = await _usersRepository.GetByNameAsync(request.Username);
         
-        if (user is null) throw new UserNotFoundException("Пользователь не найден");
+        if (user is null) throw new UserNotFoundException("User not found");
         if (!BC.Verify(request.Password, user.PasswordHash))
-            throw new InvalidCredentialsException("Неверные данные от аккаунта");
+            throw new InvalidCredentialsException("Invalid account credentials");
 
         var tokens = await _jwtTokenizer.GenerateTokenPairAsync(user);
         return tokens.Adapt<TokenPair>();

@@ -11,13 +11,17 @@ const MessageItem: FC<MessageProps> = ({ text, isOwn }) => {
     <Box
       bgcolor={"#0FCBCB"}
       mt={2}
-      ml={20}
-      p={1}
+      mr={6}
+      pr={2}
+      pl={1}
+      py={1}
       sx={{
-        maxWidth: "230px",
+        maxWidth: "250px",
         borderTopLeftRadius: "10px",
         borderTopRightRadius: "10px",
         borderBottomLeftRadius: "10px",
+        fontSize: "18px",
+        alignSelf: "end",
       }}
     >
       {text}
@@ -26,12 +30,16 @@ const MessageItem: FC<MessageProps> = ({ text, isOwn }) => {
     <Box
       bgcolor={"#333"}
       mt={2}
-      p={1}
+      pr={2}
+      pl={1}
+      py={1}
       sx={{
-        maxWidth: "230px",
+        maxWidth: "250px",
         borderTopLeftRadius: "10px",
         borderTopRightRadius: "10px",
         borderBottomRightRadius: "10px",
+        fontSize: "18px",
+        alignSelf: "start"
       }}
     >
       {text}

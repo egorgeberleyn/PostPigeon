@@ -13,5 +13,5 @@ public class UsersRepository : BaseRepository<User>, IUsersRepository
     }
 
     public async Task<User?> GetByNameAsync(string name) =>
-        await Collection.FirstOrDefaultAsync(user => user.Name == name);
+        await Collection.FirstOrDefaultAsync(user => user.Username == name);
 }

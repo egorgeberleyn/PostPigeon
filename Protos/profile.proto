@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option csharp_namespace = "PostPigeon.Server";
+
+package profile;
+
+service Profiles {
+    rpc GetProfile (GetProfileRequest) returns (Profile); 
+    rpc GetProfiles(common.None) returns (stream ProfilesList);
+    rpc UpdateProfile (UpdateProfileRequest) returns (common.None);
+    rpc ChangeAvatar (ChangeAvatarRequest) returns (common.None);
+}
+
+message GetProfileRequest {
+    string user_id = 1;
+}
+
+message UpdateProfileRequest {
+    string username = 1;
+}
+
+message ChangeAvatarRequest {
+    bytes image_bytes = 1;
+}
+
+enum UserStatus {
+    UNKNOWN = 0;
+    ONLINE = 1;
+    OFFLINE = 2;
+}
+
+message Profile {
+    string user_id = 1;
+    string username = 2;
+    bytes avatar = 3;
+    UserStatus status = 4;
+}
+
+message ProfilesList {
+    repeated Profile profiles = 1;
+}
+  

@@ -33,7 +33,7 @@ const SendMessageForm = () => {
             sx={{
               backgroundColor: "white",
               borderRadius: "10px",
-              width: "400px",
+              width: "600px",
             }}
           />
           <IconButton type="submit">

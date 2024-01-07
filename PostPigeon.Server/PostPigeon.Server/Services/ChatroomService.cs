@@ -1,5 +1,4 @@
 ﻿using Grpc.Core;
-using Mapster;
 using MapsterMapper;
 using PostPigeon.Core;
 using PostPigeon.Infra.Persistence.Repositories.Interfaces;
@@ -10,14 +9,12 @@ namespace PostPigeon.Server.Services;
 public class ChatroomService : Chatroom.ChatroomBase
 {
     private readonly IMapper _mapper;
-    private readonly IUsersRepository _usersRepository;
     private readonly IMessagesRepository _messagesRepository;
     private readonly Room _room;
 
-    public ChatroomService(IUsersRepository usersRepository, IMessagesRepository messagesRepository, 
+    public ChatroomService(IMessagesRepository messagesRepository, 
         Room room, IMapper mapper)
     {
-        _usersRepository = usersRepository;
         _messagesRepository = messagesRepository;
         _room = room;
         _mapper = mapper;
@@ -44,17 +41,5 @@ public class ChatroomService : Chatroom.ChatroomBase
             await responseStream.WriteAsync(_mapper.Map<MessageResponse>(msg));
             
         }
-    }
-
-    public override async Task GetUsers(None request, IServerStreamWriter<UserList> responseStream, 
-        ServerCallContext context)
-    {
-        var users = await _usersRepository.GetAllAsync();
-        var reply = new UserList();
-
-        users.ForEach(user =>
-            reply.Users.Add(user.Adapt<UserResponse>()));
-        
-        /*return reply;*/
     }
 }

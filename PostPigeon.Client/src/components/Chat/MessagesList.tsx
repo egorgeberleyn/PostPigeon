@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import MessageItem from "./MessageItem";
 import { useEffect, useState } from "react";
 import { receiveMessages } from "../../app/chatClient";
@@ -34,7 +34,7 @@ const MessagesList = () => {
 
   return (
     <Box
-      width={"450px"}
+      width={"800px"}
       sx={{
         overflowY: "auto",
         overflowX: "hidden",
@@ -51,17 +51,21 @@ const MessagesList = () => {
         "&::-webkit-scrollbar-thumb:hover": {
           background: "#fff",
         },
+        display: "flex",
+        justifyContent: "center",
       }}
       mb={5}
     >
-      <MessageItem text="Actually there is." isOwn={false} />
-      <MessageItem
-        text="I need to know the privacy policy of your business in a very short summary."
-        isOwn={false}
-      />
-      {messages.map((message, index) => (
-        <MessageItem key={index} text={message.text} isOwn={message.isOwn} />
-      ))}
+      <Stack width="80%" direction={"column"}>
+        <MessageItem text="Actually there is." isOwn={false} />
+        <MessageItem
+          text="I need to know the privacy policy of your business in a very short summary."
+          isOwn={false}
+        />
+        {messages.map((message, index) => (
+          <MessageItem key={index} text={message.text} isOwn={message.isOwn} />
+        ))}
+      </Stack>
     </Box>
   );
 };

@@ -21,16 +21,13 @@
     <ItemGroup>
         <Protobuf Include="..\..\Protos\chatroom.proto" GrpcServices="Server"/>
         <Protobuf Include="..\..\Protos\auth.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\Protos\profile.proto" GrpcServices="Server"/>
         <Protobuf Include="..\..\Protos\common.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\PostPigeon.Infra\PostPigeon.Infra.csproj" />
       <ProjectReference Include="..\PostPigeon.Core\PostPigeon.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Interfaces\" />
     </ItemGroup>
 
 </Project>

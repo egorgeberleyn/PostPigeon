@@ -10,15 +10,17 @@ import {
   Drawer,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const sections = [
-  { name: "Profile", icon: <Person2 /> },
-  { name: "Chats", icon: <Chat /> },
-  { name: "Settings", icon: <Settings /> },
+  { name: "Profile", icon: <Person2 />, link: "/profile" },
+  { name: "Chats", icon: <Chat />, link: "/" },
+  { name: "Settings", icon: <Settings />, link: "/settings" },
 ];
 
 const NavPanel = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -47,7 +49,11 @@ const NavPanel = () => {
     >
       <List>
         {sections.map((section) => (
-          <ListItem key={section.name} sx={{ m: 0, p: "10px 5px 5px 5px" }}>
+          <ListItem
+            key={section.name}
+            sx={{ m: 0, p: "10px 5px 5px 5px" }}
+            onClick={() => navigate(section.link)}
+          >
             <ListItemButton sx={{ m: 0, "&:hover": { bgcolor: "gray" } }}>
               <ListItemIcon sx={{ color: "secondary.main" }}>
                 {section.icon}
@@ -70,7 +76,6 @@ const NavPanel = () => {
             bgcolor: "#222222",
             height: "100%",
             color: "white",
-            borderTopRightRadius: "10px",
           }}
         >
           <Box>
@@ -86,7 +91,10 @@ const NavPanel = () => {
                 </ListItemButton>
               </ListItem>
               {sections.map((section) => (
-                <ListItem key={section.name}>
+                <ListItem
+                  key={section.name}
+                  onClick={() => navigate(section.link)}
+                >
                   <ListItemButton sx={{ p: 0, mb: 2 }}>
                     <ListItemIcon sx={{ color: "secondary.main" }}>
                       {section.icon}
