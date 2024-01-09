@@ -6,6 +6,8 @@
 - .NET 6, MongoDb, gRPC, Mapster
 - React TS, Html/css, Material UI kit
 
+![0_vgOvWuAq-Q9EJpzN](https://github.com/egorgeberleyn/PostPigeon/assets/79607850/9fecc641-d25d-46d3-931f-fdc450d8c74c)
+
 ### Terms of reference
 
 Main - chat functions
