@@ -1,11 +1,13 @@
 ﻿using Grpc.Core;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using PostPigeon.Core;
 using PostPigeon.Infra.Persistence.Repositories.Interfaces;
 using PostPigeon.Core.Models;
 
 namespace PostPigeon.Server.Services;
 
+[Authorize]
 public class ChatroomService : Chatroom.ChatroomBase
 {
     private readonly IMapper _mapper;

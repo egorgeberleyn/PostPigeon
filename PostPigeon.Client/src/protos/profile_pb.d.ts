@@ -1,6 +1,7 @@
 import * as jspb from 'google-protobuf'
 
 import * as common_pb from './common_pb';
+import * as google_protobuf_wrappers_pb from 'google-protobuf/google/protobuf/wrappers_pb';
 
 
 export class GetProfileRequest extends jspb.Message {
@@ -25,6 +26,14 @@ export class UpdateProfileRequest extends jspb.Message {
   getUsername(): string;
   setUsername(value: string): UpdateProfileRequest;
 
+  getPassword(): google_protobuf_wrappers_pb.StringValue | undefined;
+  setPassword(value?: google_protobuf_wrappers_pb.StringValue): UpdateProfileRequest;
+  hasPassword(): boolean;
+  clearPassword(): UpdateProfileRequest;
+
+  getEmail(): string;
+  setEmail(value: string): UpdateProfileRequest;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): UpdateProfileRequest.AsObject;
   static toObject(includeInstance: boolean, msg: UpdateProfileRequest): UpdateProfileRequest.AsObject;
@@ -36,6 +45,8 @@ export class UpdateProfileRequest extends jspb.Message {
 export namespace UpdateProfileRequest {
   export type AsObject = {
     username: string,
+    password?: google_protobuf_wrappers_pb.StringValue.AsObject,
+    email: string,
   }
 }
 
@@ -66,10 +77,13 @@ export class Profile extends jspb.Message {
   getUsername(): string;
   setUsername(value: string): Profile;
 
-  getAvatar(): Uint8Array | string;
-  getAvatar_asU8(): Uint8Array;
-  getAvatar_asB64(): string;
-  setAvatar(value: Uint8Array | string): Profile;
+  getAvatar(): google_protobuf_wrappers_pb.BytesValue | undefined;
+  setAvatar(value?: google_protobuf_wrappers_pb.BytesValue): Profile;
+  hasAvatar(): boolean;
+  clearAvatar(): Profile;
+
+  getEmail(): string;
+  setEmail(value: string): Profile;
 
   getStatus(): UserStatus;
   setStatus(value: UserStatus): Profile;
@@ -86,7 +100,8 @@ export namespace Profile {
   export type AsObject = {
     userId: string,
     username: string,
-    avatar: Uint8Array | string,
+    avatar?: google_protobuf_wrappers_pb.BytesValue.AsObject,
+    email: string,
     status: UserStatus,
   }
 }

@@ -16,8 +16,8 @@ const MessagesList = () => {
       chatStream.on("data", (response) => {
         const senderId = response.getSenderId();
 
-        const jwtPayload = decodeToken(storedValue);
-        if (senderId === jwtPayload.sub)
+        const claims = decodeToken(storedValue);
+        if (senderId === claims.userId)
           setMessages((oldArray) => [
             ...oldArray,
             { isOwn: true, text: response.getTextMessage() },
@@ -60,7 +60,7 @@ const MessagesList = () => {
         <MessageItem text="Actually there is." isOwn={false} />
         <MessageItem
           text="I need to know the privacy policy of your business in a very short summary."
-          isOwn={false}
+          isOwn={true}
         />
         {messages.map((message, index) => (
           <MessageItem key={index} text={message.text} isOwn={message.isOwn} />

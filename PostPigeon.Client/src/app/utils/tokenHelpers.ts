@@ -1,6 +1,10 @@
 import {jwtDecode} from "jwt-decode";
 
-export const decodeToken = (token: string) => {
+interface Claims {
+    userId: string;
+}
+
+export const decodeToken = (token: string): Claims => {
     var decodeToken = jwtDecode(token);
-    return decodeToken
+    return {userId: decodeToken.sub!}
 }

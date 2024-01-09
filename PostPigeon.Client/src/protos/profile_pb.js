@@ -23,6 +23,8 @@ var global =
 
 var common_pb = require('./common_pb.js');
 goog.object.extend(proto, common_pb);
+var google_protobuf_wrappers_pb = require('google-protobuf/google/protobuf/wrappers_pb.js');
+goog.object.extend(proto, google_protobuf_wrappers_pb);
 goog.exportSymbol('proto.profile.ChangeAvatarRequest', null, global);
 goog.exportSymbol('proto.profile.GetProfileRequest', null, global);
 goog.exportSymbol('proto.profile.Profile', null, global);
@@ -296,7 +298,9 @@ proto.profile.UpdateProfileRequest.prototype.toObject = function(opt_includeInst
  */
 proto.profile.UpdateProfileRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, "")
+    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    password: (f = msg.getPassword()) && google_protobuf_wrappers_pb.StringValue.toObject(includeInstance, f),
+    email: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -337,6 +341,15 @@ proto.profile.UpdateProfileRequest.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {string} */ (reader.readString());
       msg.setUsername(value);
       break;
+    case 2:
+      var value = new google_protobuf_wrappers_pb.StringValue;
+      reader.readMessage(value,google_protobuf_wrappers_pb.StringValue.deserializeBinaryFromReader);
+      msg.setPassword(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -373,6 +386,21 @@ proto.profile.UpdateProfileRequest.serializeBinaryToWriter = function(message, w
       f
     );
   }
+  f = message.getPassword();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_wrappers_pb.StringValue.serializeBinaryToWriter
+    );
+  }
+  f = message.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -391,6 +419,61 @@ proto.profile.UpdateProfileRequest.prototype.getUsername = function() {
  */
 proto.profile.UpdateProfileRequest.prototype.setUsername = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.StringValue password = 2;
+ * @return {?proto.google.protobuf.StringValue}
+ */
+proto.profile.UpdateProfileRequest.prototype.getPassword = function() {
+  return /** @type{?proto.google.protobuf.StringValue} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.StringValue, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.StringValue|undefined} value
+ * @return {!proto.profile.UpdateProfileRequest} returns this
+*/
+proto.profile.UpdateProfileRequest.prototype.setPassword = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.profile.UpdateProfileRequest} returns this
+ */
+proto.profile.UpdateProfileRequest.prototype.clearPassword = function() {
+  return this.setPassword(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.profile.UpdateProfileRequest.prototype.hasPassword = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional string email = 3;
+ * @return {string}
+ */
+proto.profile.UpdateProfileRequest.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.profile.UpdateProfileRequest} returns this
+ */
+proto.profile.UpdateProfileRequest.prototype.setEmail = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -582,8 +665,9 @@ proto.profile.Profile.toObject = function(includeInstance, msg) {
   var f, obj = {
     userId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     username: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    avatar: msg.getAvatar_asB64(),
-    status: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    avatar: (f = msg.getAvatar()) && google_protobuf_wrappers_pb.BytesValue.toObject(includeInstance, f),
+    email: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    status: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -629,10 +713,15 @@ proto.profile.Profile.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUsername(value);
       break;
     case 3:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      var value = new google_protobuf_wrappers_pb.BytesValue;
+      reader.readMessage(value,google_protobuf_wrappers_pb.BytesValue.deserializeBinaryFromReader);
       msg.setAvatar(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
+      break;
+    case 5:
       var value = /** @type {!proto.profile.UserStatus} */ (reader.readEnum());
       msg.setStatus(value);
       break;
@@ -679,17 +768,25 @@ proto.profile.Profile.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getAvatar_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
+  f = message.getAvatar();
+  if (f != null) {
+    writer.writeMessage(
       3,
+      f,
+      google_protobuf_wrappers_pb.BytesValue.serializeBinaryToWriter
+    );
+  }
+  f = message.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
   f = message.getStatus();
   if (f !== 0.0) {
     writer.writeEnum(
-      4,
+      5,
       f
     );
   }
@@ -733,53 +830,66 @@ proto.profile.Profile.prototype.setUsername = function(value) {
 
 
 /**
- * optional bytes avatar = 3;
- * @return {string}
+ * optional google.protobuf.BytesValue avatar = 3;
+ * @return {?proto.google.protobuf.BytesValue}
  */
 proto.profile.Profile.prototype.getAvatar = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type{?proto.google.protobuf.BytesValue} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_wrappers_pb.BytesValue, 3));
 };
 
 
 /**
- * optional bytes avatar = 3;
- * This is a type-conversion wrapper around `getAvatar()`
- * @return {string}
- */
-proto.profile.Profile.prototype.getAvatar_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getAvatar()));
+ * @param {?proto.google.protobuf.BytesValue|undefined} value
+ * @return {!proto.profile.Profile} returns this
+*/
+proto.profile.Profile.prototype.setAvatar = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
 /**
- * optional bytes avatar = 3;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getAvatar()`
- * @return {!Uint8Array}
- */
-proto.profile.Profile.prototype.getAvatar_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getAvatar()));
-};
-
-
-/**
- * @param {!(string|Uint8Array)} value
+ * Clears the message field making it undefined.
  * @return {!proto.profile.Profile} returns this
  */
-proto.profile.Profile.prototype.setAvatar = function(value) {
-  return jspb.Message.setProto3BytesField(this, 3, value);
+proto.profile.Profile.prototype.clearAvatar = function() {
+  return this.setAvatar(undefined);
 };
 
 
 /**
- * optional UserStatus status = 4;
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.profile.Profile.prototype.hasAvatar = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional string email = 4;
+ * @return {string}
+ */
+proto.profile.Profile.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.profile.Profile} returns this
+ */
+proto.profile.Profile.prototype.setEmail = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional UserStatus status = 5;
  * @return {!proto.profile.UserStatus}
  */
 proto.profile.Profile.prototype.getStatus = function() {
-  return /** @type {!proto.profile.UserStatus} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.profile.UserStatus} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -788,7 +898,7 @@ proto.profile.Profile.prototype.getStatus = function() {
  * @return {!proto.profile.Profile} returns this
  */
 proto.profile.Profile.prototype.setStatus = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 

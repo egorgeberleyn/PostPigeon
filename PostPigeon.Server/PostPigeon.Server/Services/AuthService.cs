@@ -25,7 +25,7 @@ public class AuthService : Auth.AuthBase
             throw new UserExistsException("User with same name already exists");
 
         var passwordHash = BC.HashPassword(request.Password);
-        var newUser = User.Create(request.Username, passwordHash);
+        var newUser = User.Create(request.Username, passwordHash, request.Email);
         await _usersRepository.CreateAsync(newUser);
         
         var tokens = await _jwtTokenizer.GenerateTokenPairAsync(newUser);

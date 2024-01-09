@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "common.proto";
+import "google/protobuf/wrappers.proto";
 
 option csharp_namespace = "PostPigeon.Server";
 
@@ -19,6 +20,8 @@ message GetProfileRequest {
 
 message UpdateProfileRequest {
     string username = 1;
+    google.protobuf.StringValue password = 2;
+    string email = 3;
 }
 
 message ChangeAvatarRequest {
@@ -34,8 +37,9 @@ enum UserStatus {
 message Profile {
     string user_id = 1;
     string username = 2;
-    bytes avatar = 3;
-    UserStatus status = 4;
+    google.protobuf.BytesValue avatar = 3;
+    string email = 4;
+    UserStatus status = 5;
 }
 
 message ProfilesList {

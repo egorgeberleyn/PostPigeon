@@ -1,15 +1,17 @@
-import { Box } from "@mui/material";
+import { Avatar, Box, Stack } from "@mui/material";
 import { FC } from "react";
+import { theme } from "../../Theme";
 
 interface MessageProps {
   text: string;
-  isOwn: boolean;
+  isOwn: boolean; 
 }
 
 const MessageItem: FC<MessageProps> = ({ text, isOwn }) => {
+  
   return isOwn ? (
     <Box
-      bgcolor={"#0FCBCB"}
+      bgcolor={theme.palette.secondary.main}
       mt={2}
       mr={6}
       pr={2}
@@ -27,23 +29,25 @@ const MessageItem: FC<MessageProps> = ({ text, isOwn }) => {
       {text}
     </Box>
   ) : (
-    <Box
-      bgcolor={"#333"}
-      mt={2}
-      pr={2}
-      pl={1}
-      py={1}
-      sx={{
-        maxWidth: "250px",
-        borderTopLeftRadius: "10px",
-        borderTopRightRadius: "10px",
-        borderBottomRightRadius: "10px",
-        fontSize: "18px",
-        alignSelf: "start"
-      }}
-    >
-      {text}
-    </Box>
+    <Stack direction={"row"}>
+      <Avatar sx={{ width: "30px", height: "30px", alignSelf: "end", mr: 1 }}>A</Avatar>
+      <Box
+        bgcolor={theme.palette.info.dark}
+        mt={2}
+        pr={2}
+        pl={1}
+        py={1}
+        sx={{
+          maxWidth: "250px",
+          borderTopLeftRadius: "10px",
+          borderTopRightRadius: "10px",
+          borderBottomRightRadius: "10px",
+          fontSize: "18px",
+        }}
+      >
+        {text}
+      </Box>
+    </Stack>
   );
 };
 

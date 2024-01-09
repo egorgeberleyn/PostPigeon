@@ -12,10 +12,10 @@ const SendMessageForm = () => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const message = getInputValue(event, "message");
-    const jwtPayload = decodeToken(storedValue);
+    const claims = decodeToken(storedValue);
 
     if (message) {
-      sendMessage(jwtPayload.sub!, message);
+      sendMessage(claims.userId, message);
       event.currentTarget.reset();
     }
   };
@@ -37,7 +37,7 @@ const SendMessageForm = () => {
             }}
           />
           <IconButton type="submit">
-            <SendIcon sx={{ color: "#0FCBCB", fontSize: "30px", ml: 1 }} />
+            <SendIcon sx={{ color: "secondary.main", fontSize: "30px", ml: 1 }} />
           </IconButton>
         </Stack>
       </form>
