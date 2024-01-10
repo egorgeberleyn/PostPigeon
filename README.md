@@ -5,16 +5,11 @@
 
 - .NET 8, MongoDb, gRPC, Mapster
 - Typescript, React, gRPC Web, Html/css, Material UI kit
+- Envoy proxy
 
 ![0_vgOvWuAq-Q9EJpzN](https://github.com/egorgeberleyn/PostPigeon/assets/79607850/9fecc641-d25d-46d3-931f-fdc450d8c74c)
 
 ### Terms of reference
-
-Main - chat functions
-
-1. text messages 
-2. send emoji
-3. forward messages
 
 Features
 
