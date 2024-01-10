@@ -3,8 +3,8 @@
 
 ### Stack
 
-- .NET 6, MongoDb, gRPC, Mapster
-- React TS, Html/css, Material UI kit
+- .NET 8, MongoDb, gRPC, Mapster
+- Typescript, React, gRPC Web, Html/css, Material UI kit
 
 ![0_vgOvWuAq-Q9EJpzN](https://github.com/egorgeberleyn/PostPigeon/assets/79607850/9fecc641-d25d-46d3-931f-fdc450d8c74c)
 
@@ -20,5 +20,4 @@ Features
 
 1. Authentication/Authorization
 2. Edit profile info, avatar
-3. Upload files into chat
-4. Send stiсkers
+3. Send messages & stiсkers
