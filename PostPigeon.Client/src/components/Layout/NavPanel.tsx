@@ -1,4 +1,4 @@
-import { Chat, Person2, Menu, Settings } from "@mui/icons-material";
+import { Chat, Person2, Menu, Logout } from "@mui/icons-material";
 import {
   Box,
   List,
@@ -8,19 +8,24 @@ import {
   ListItemText,
   Divider,
   Drawer,
+  Modal,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogoutForm from "../Forms/LogoutForm";
 
 const sections = [
   { name: "Profile", icon: <Person2 />, link: "/profile" },
   { name: "Chats", icon: <Chat />, link: "/" },
-  { name: "Settings", icon: <Settings />, link: "/settings" },
 ];
 
 const NavPanel = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
+  const [openLogout, setOpenLogout] = useState(false);
+  const handleOpen = () => setOpenLogout(true);
+  const handleClose = () => setOpenLogout(false);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -62,6 +67,14 @@ const NavPanel = () => {
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem sx={{ m: 0, p: "10px 5px 5px 5px" }}>
+          <ListItemButton sx={{ m: 0, "&:hover": { bgcolor: "gray" } }}>
+            <ListItemIcon sx={{ color: "secondary.main" }}>
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary={"Log out"} />
+          </ListItemButton>
+        </ListItem>
       </List>
       <Divider sx={{ bgcolor: "#333" }} />
     </Box>
@@ -102,6 +115,13 @@ const NavPanel = () => {
                   </ListItemButton>
                 </ListItem>
               ))}
+              <ListItem onClick={handleOpen}>
+                <ListItemButton sx={{ p: 0, mb: 2 }}>
+                  <ListItemIcon sx={{ color: "secondary.main" }}>
+                    <Logout />
+                  </ListItemIcon>
+                </ListItemButton>
+              </ListItem>
             </List>
           </Box>
         </Box>
@@ -114,6 +134,23 @@ const NavPanel = () => {
       >
         {list()}
       </Drawer>
+      <Modal open={openLogout} onClose={handleClose}>
+        <Box
+          sx={{
+            position: "absolute" as "absolute",
+            top: "40%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 500,
+            bgcolor: "#D3D3D3",
+            boxShadow: 24,
+            p: 4,
+            borderRadius: "10px",
+          }}
+        >
+          <LogoutForm close={handleClose}/>
+        </Box>
+      </Modal>
     </>
   );
 };

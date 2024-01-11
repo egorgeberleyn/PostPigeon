@@ -37,3 +37,8 @@ export const refreshToken = async (refreshToken: string) => {
   const response = await client.refreshToken(request, {});
   return response.toObject();
 };
+
+export const logout = () => {
+  localStorage.removeItem("token");
+  window.location.href = window.origin + "/auth/login";
+}

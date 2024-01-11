@@ -16,6 +16,7 @@
         <PackageReference Include="Mapster.Core" Version="1.2.1" />
         <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
         <PackageReference Include="Mapster.EFCore" Version="5.1.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
         <PackageReference Include="MongoDB.Driver" Version="2.23.1" />
     </ItemGroup>
 
