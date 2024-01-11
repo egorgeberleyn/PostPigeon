@@ -33,9 +33,9 @@ const ChatPage: React.FC = () => {
           width: "380px",
         }}
       >
-        <Typography variant="h6" mt={2} textAlign={"center"}>
+        {/* <Typography variant="h6" mt={2} textAlign={"center"}>
           Media
-        </Typography>
+        </Typography> */}
       </Box>
     </>
   );

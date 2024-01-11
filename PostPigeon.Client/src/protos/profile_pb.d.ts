@@ -85,9 +85,6 @@ export class Profile extends jspb.Message {
   getEmail(): string;
   setEmail(value: string): Profile;
 
-  getStatus(): UserStatus;
-  setStatus(value: UserStatus): Profile;
-
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Profile.AsObject;
   static toObject(includeInstance: boolean, msg: Profile): Profile.AsObject;
@@ -102,7 +99,6 @@ export namespace Profile {
     username: string,
     avatar?: google_protobuf_wrappers_pb.BytesValue.AsObject,
     email: string,
-    status: UserStatus,
   }
 }
 
@@ -126,8 +122,3 @@ export namespace ProfilesList {
   }
 }
 
-export enum UserStatus { 
-  UNKNOWN = 0,
-  ONLINE = 1,
-  OFFLINE = 2,
-}
