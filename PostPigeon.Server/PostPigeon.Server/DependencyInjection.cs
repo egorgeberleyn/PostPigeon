@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MapsterMapper;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using PostPigeon.Server.Interceptors;
 using PostPigeon.Server.Mappings;
 
@@ -15,6 +16,8 @@ public static class DependencyInjection
             options.Interceptors.Add<ExceptionInterceptor>();
             options.Interceptors.Add<LoggingInterceptor>();
         });
+        services.AddGrpcHealthChecks()
+            .AddCheck("Ping", () => HealthCheckResult.Healthy());
     
         //Add mapper
         services.AddSingleton(
