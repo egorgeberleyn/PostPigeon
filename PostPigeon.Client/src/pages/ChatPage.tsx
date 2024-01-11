@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import NavPanel from "../components/Layout/NavPanel";
 import MessagesList from "../components/Chat/MessagesList";
@@ -24,6 +24,19 @@ const ChatPage: React.FC = () => {
         <MessagesList />
         <SendMessageForm />
       </Stack>
+      <Box
+        sx={{
+          left: "75%",
+          position: "absolute",
+          height: "100vh",
+          bgcolor: "#111",
+          width: "380px",
+        }}
+      >
+        <Typography variant="h6" mt={2} textAlign={"center"}>
+          Media
+        </Typography>
+      </Box>
     </>
   );
 };

@@ -1,5 +1,4 @@
 ﻿using PostPigeon.Core.Models.Base;
-using PostPigeon.Core.Models.Enums;
 
 namespace PostPigeon.Core.Models;
 
@@ -17,8 +16,6 @@ public class User : Entity
     public string Email { get; private set; }
 
     public byte[]? Avatar { get; private set; }
-    
-    public UserStatus Status { get; private set; }
     
     public string PasswordHash { get; private set; }
 

@@ -1,14 +1,15 @@
 import { Avatar, Box, Stack } from "@mui/material";
+import { Offline, Online } from "react-detect-offline";
 import { FC } from "react";
 import { theme } from "../../Theme";
+import StyledBadge from "./StyledBadge";
 
 interface MessageProps {
   text: string;
-  isOwn: boolean; 
+  isOwn: boolean;
 }
 
 const MessageItem: FC<MessageProps> = ({ text, isOwn }) => {
-  
   return isOwn ? (
     <Box
       bgcolor={theme.palette.secondary.main}
@@ -30,7 +31,22 @@ const MessageItem: FC<MessageProps> = ({ text, isOwn }) => {
     </Box>
   ) : (
     <Stack direction={"row"}>
-      <Avatar sx={{ width: "30px", height: "30px", alignSelf: "end", mr: 1 }}>A</Avatar>
+      <Offline>
+        <Avatar sx={{ width: "30px", height: "30px", alignSelf: "end", mr: 1 }}>
+          A
+        </Avatar>
+      </Offline>
+
+      <Online>
+        <StyledBadge>
+          <Avatar
+            sx={{ width: "30px", height: "30px", alignSelf: "end", mr: 1 }}
+          >
+            A
+          </Avatar>
+        </StyledBadge>
+      </Online>
+
       <Box
         bgcolor={theme.palette.info.dark}
         mt={2}

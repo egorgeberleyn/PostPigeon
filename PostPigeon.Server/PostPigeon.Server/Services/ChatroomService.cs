@@ -41,7 +41,6 @@ public class ChatroomService : Chatroom.ChatroomBase
         {
             var msg = await _room.ReadMessageAsync(context.CancellationToken);
             await responseStream.WriteAsync(_mapper.Map<MessageResponse>(msg));
-            
         }
     }
 }

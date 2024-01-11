@@ -10,8 +10,7 @@ public class RegisterMapper : IRegister
     {
         config.NewConfig<User, Profile>()
             .Map(dist => dist.UserId, src => src.Id.ToString())
-            .Map(dist => dist.Avatar, src => src.Avatar == null ? default : ByteString.CopyFrom(src.Avatar))
-            .Map(dist => dist.Status, src => src.Status);
+            .Map(dist => dist.Avatar, src => src.Avatar == null ? default : UnsafeByteOperations.UnsafeWrap(src.Avatar));
         
         config.NewConfig<Message, MessageResponse>()
             .Map(dist => dist.TextMessage, src => src.Text)

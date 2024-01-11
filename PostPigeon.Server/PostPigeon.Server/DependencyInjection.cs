@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddGrpc(options =>
         {
             options.Interceptors.Add<ExceptionInterceptor>();
+            options.Interceptors.Add<LoggingInterceptor>();
         });
     
         //Add mapper

@@ -1,5 +1,5 @@
-﻿using Grpc.Core;
-using Microsoft.IdentityModel.JsonWebTokens;
+﻿using System.Security.Claims;
+using Grpc.Core;
 using PostPigeon.Core.Models;
 using PostPigeon.Infra.Persistence.Repositories.Interfaces;
 
@@ -16,10 +16,8 @@ public class CurrentUserContext : IUserContext
 
     public async Task<User?> GetCurrentUserAsync(ServerCallContext context)
     {
-        var tokenStr = context.RequestHeaders.GetValue("Authorization")
-            ?.Replace("bearer ", string.Empty, StringComparison.OrdinalIgnoreCase);
-        var jwtToken = new JsonWebToken(tokenStr);
-        var userIdStr = jwtToken.Subject;
+        var userIdStr = context.GetHttpContext().User
+            .FindFirst(ClaimTypes.NameIdentifier)?.Value;
         
         if (!Guid.TryParse(userIdStr, out var userId))
             throw new InvalidCastException("Invalid GUID format");

@@ -28,18 +28,11 @@ message ChangeAvatarRequest {
     bytes image_bytes = 1;
 }
 
-enum UserStatus {
-    UNKNOWN = 0;
-    ONLINE = 1;
-    OFFLINE = 2;
-}
-
 message Profile {
     string user_id = 1;
     string username = 2;
     google.protobuf.BytesValue avatar = 3;
     string email = 4;
-    UserStatus status = 5;
 }
 
 message ProfilesList {
